@@ -7,8 +7,6 @@ import time
 X_POS_RIGHT = 350
 X_POS_LEFT = -350
 Y_POS = 0
-score_left = 0
-score_right = 0
 
 screen = Screen()
 screen.setup(width=800, height=600)
@@ -44,12 +42,10 @@ while game_is_on:
 
     #Detect Points
     if ball.xcor() > 380:
-        score_left += 1
         ball.reset_position()
         score.l_point()
 
     elif ball.xcor() < -380:
-        score_right +=1
         ball.reset_position()
         score.r_point()
 
