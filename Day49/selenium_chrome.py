@@ -39,8 +39,16 @@ class SeleniunConfigure:
                 for t in time_tue:
                     if "6:00 PM" in t.text:
                         click_button = card.find_element(By.CSS_SELECTOR, value = "button[id^='book-button-']")
-                        click_button.click()
-                        print(f"✓ Booked for {day_title} and at hour {t.text}")
+                        if click_button.text == "Booked":
+                            print(f'✓ Already booked: {card.find_element(By.CSS_SELECTOR, value="h3[id^=class-name-]").text} on {day_title} at hout {t.text}')
+                        elif click_button.text == "Waitlisted":
+                            print(f'✓ Already on Waitlist: {card.find_element(By.CSS_SELECTOR, value="h3[id^=class-name-]").text} on {day_title} at hout {t.text}')
+                        elif click_button.text == "Join Waitlist":
+                            click_button.click()
+                            print(f'✓ Joined Waitlist for: {card.find_element(By.CSS_SELECTOR, value="h3[id^=class-name-]").text} on {day_title} at hout {t.text}')
+                        else:
+                            click_button.click()
+                            print(f"✓ Booked for {card.find_element(By.CSS_SELECTOR, value="h3[id^=class-name-]").text} on {day_title} and at hour {t.text}")
         #Just for debug
         # see_booking = self.driver.find_element(By.ID, value="my-bookings-link")
         # see_booking.click()
